@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<img src = "images/shake.png" class="shake hide" data-value = "{a: 3, b: 4}"/>
+<img src = "images/shake.png" class="transform" data-value = "{a: 3, b: 4}"/>
+<script src="js/jquery-3.0.0.min.js"></script>
+<script>
+    var shake = $(".shake");
+    setTimeout(function(){
+        shake.removeClass("hide");
+    }, 4000)
+</script>
+</body>
+</html>

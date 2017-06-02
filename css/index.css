@@ -1,0 +1,40 @@
+.shake {
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+    width: 9.5rem;
+    padding: 0 .2rem;
+    -webkit-animation: shake 2s .2s ease infinite;
+    -moz-animation: shake 2s .2s ease infinite;
+}
+.transform{
+    position: absolute;
+    top: 10rem;
+    left: 3rem;
+    width: 9.5rem;
+
+}
+.transform:hover{
+    transform: translate3d(-2rem, 2.3rem, 0px);
+}
+.hide{
+    display: none;
+}
+
+@keyframes shake {
+    0%, 10%, 20%, 30%, 40% {
+        -webkit-transform: scale(1)
+    }
+    55% {
+        -webkit-transform: scale(0.9) rotate(-3deg)
+    }
+    60%, 70%, 80%, 90%{
+        -webkit-transform: scale(1.1) rotate(3deg)
+    }
+    65%, 75%, 85%, 95% {
+        -webkit-transform: scale(1.1) rotate(-3deg)
+    }
+    100% {
+        -webkit-transform: scale(1) rotate(0)
+    }
+}
