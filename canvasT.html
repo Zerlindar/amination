@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+    function random(start, end) {
+        return Math.round(Math.random() * (end - start) + start);
+    }
+    function floatSnow(ele, maxNum, speed, interval) {
+        var canvas    = document.getElementById(ele),
+            ctx       = canvas.getContext("2d"),
+            W         = window.innerWidth,
+            H         = window.innerHeight,
+            color     = ["#000000", '#795548', '#FF5722', '#009688'],
+            MAX       = maxNum,
+            snowArr   = [],
+            timer     = [],
+            oneTimer  = [];
+        canvas.width  = W;
+        canvas.height = H;
+        function initSnow() {
+            var loading = setInterval(function() {
+                snowArr.push({
+                    x: Math.random() * W,       //定义起始路径
+                    y: 0,       //定义起始路径
+                    r: 30,                      //radius
+                    s: random(1, 2),
+                    color: color[random(0, 3)]
+                });
+                oneTimer = setInterval(function() {
+                    draw(snowArr.length)
+                }, speed * 1000)
+                if(snowArr.length == MAX) {
+                    clearInterval(loading);
+                    clearInterval(oneTimer);
+                    timer = setInterval(function() {
+                        draw(MAX)
+                    }, speed * 1000)
+                }
+            }, 1000)
+        }
+        function draw(num) {
+            ctx.clearRect(0, 0, W, H);       //清空当前画布
+            for(var i = 0; i < num; i++) {   //分别绘制所需要的点
+                var p = snowArr[i];
+                ctx.beginPath()                          //重置路径
+                ctx.fillStyle = snowArr[i].color;         //设定画笔颜色
+                ctx.moveTo(p.x, p.y);
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+                ctx.fill();
+                ctx.closePath() //注意此处
+            }
+            ctx.fill();
+            move(num);
+        }
+
+        function move(num) {
+            for(var i = 0; i < num; i++) {
+                var p = snowArr[i],
+                        speed = snowArr[i].s;
+                p.y += 5 * speed;
+                if(p.y > H + 5 * speed) {
+                    snowArr[i] = {
+                        x: Math.random() * W,       //定义起始路径
+                        y: 5,       //定义起始路径
+                        r: 30,   //radius
+                        s: random(1, 2),
+                    }
+                }
+            }
+        }
+
+        initSnow();
+    }
+    new floatSnow("canvas", 6, .05);
+</script>
+</body>
+</html>
